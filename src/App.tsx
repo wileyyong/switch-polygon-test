@@ -7,21 +7,6 @@ import {
   UserRejectedRequestError as UserRejectedRequestErrorInjected,
 } from "@web3-react/injected-connector";
 
-export interface IERC20 {
-  symbol: string,
-  address: string,
-  decimals: number,
-  name: string
-}
-
-export const Networks = {
-  MainNet: 1,
-  Rinkeby: 4,
-  Ropsten: 3,
-  Kovan: 42,
-  Polygon: 137
-}
-
 function getErrorMessage(error: Error) {
   if (error instanceof NoEthereumProviderError) {
     return "No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.";
