@@ -1,0 +1,98 @@
+.app-container {
+  background-color: #474040;
+}
+.app-container .app-header {
+  background-color: black;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  color: white;
+  height: 90px;
+}
+.app-header .logo {
+  font-family: "Righteous";
+  font-size: 36px;
+  font-weight: 400;
+}
+.app-header .connection {
+  background-color: white;
+  color: black;
+  margin-right: 20px;
+  border-radius: 50px;
+}
+.app-header .connection button {
+  background-color: #E5E5E5;
+  border-radius: 50px;
+  font-size: 18px;
+  font-family: "Righteous";
+  font-weight: 400;
+  text-transform: capitalize;
+  color: black;
+}
+.app-container .message-box {
+  max-width: 600px;
+  padding: 35px 40px;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.app-container .box-text {
+  font-family: 'Righteous';
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.message-box button {
+  background-color: #E5E5E5;
+  border-radius: 50px;
+  height: 45px;
+  color: black;
+  font-family: 'Righteous';
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.keys-group {
+  width: 1200px;
+}
+.keys-group .group-item {
+  position: relative;
+  margin: 10px;
+}
+.keys-group .key-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px 28px;
+  border-radius: 10px;
+  color: black;
+  font-family: 'Righteous';
+  font-weight: 400;
+  padding-bottom: 60px;
+}
+
+.key-item img {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+.key-item .key-title {
+  font-size: 25px;
+}
+.key-item .key-value {
+  margin-bottom: 30px;
+}
+
+.key-item .setkey-btn {
+  font-size: 36px;
+  font-family: 'Righteous';
+  font-weight: 400;
+  color: white;
+  background-color: black;
+  border-radius: 20px;
+  height: 45px;
+  text-transform: capitalize;
+  padding: 10px 20px;
+}

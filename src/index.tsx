@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import App from "./App";
 import { Web3Provider } from "@ethersproject/providers";
 import { Web3ReactProvider } from "@web3-react/core";
+import './styles/index.css';
 
 function getLibrary(provider: any): Web3Provider {
   const library = new Web3Provider(provider);
