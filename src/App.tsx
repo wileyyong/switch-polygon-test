@@ -49,7 +49,7 @@ export default function App() {
       account(web3).then(account => {
         const revenueContract = new web3.eth.Contract([{"inputs": [{"internalType": "address", "name": "account", "type": "address"}, {"internalType": "uint256", "name": "id", "type": "uint256"}], "name": "balanceOf", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}], "0x3702f4c46785bbd947d59a2516ac1ea30f2babf2")
         for (let tokenId = 1; tokenId <= 3; tokenId++) {
-          revenueContract.methods.balanceOf("0x291763E8F7D15679B6bE22755Ee3001558C8C430", tokenId)
+          revenueContract.methods.balanceOf(revenueContract, tokenId)
           .call({ from: account })
           .then((result: string) => {
             console.log("balanceOf", tokenId, result)
