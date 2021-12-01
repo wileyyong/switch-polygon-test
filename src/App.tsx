@@ -77,10 +77,10 @@ export default function App() {
       account(web3).then(account => {
         const revenueContract = new web3.eth.Contract([{"inputs": [{"internalType": "address", "name": "account", "type": "address"}, {"internalType": "uint256", "name": "id", "type": "uint256"}], "name": "balanceOf", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}], "0x3702f4c46785bbd947d59a2516ac1ea30f2babf2")
         for (let tokenId = 1; tokenId <= 3; tokenId++) {
-          revenueContract.methods.balanceOf(revenueContract, tokenId)
+          revenueContract.methods.balanceOf(account, tokenId)
           .call({ from: account })
           .then((result: string) => {
-            console.log("balanceOf", tokenId, result)
+            console.log("balanceOf", tokenId, result) //0x18632ee94d6395e0cd1ea6c7ee702712baf7c6d9 :test https://opensea.io/GFCVault,  the address of our vault
           })
         }
       })
