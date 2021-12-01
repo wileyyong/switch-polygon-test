@@ -23,54 +23,13 @@ function getErrorMessage(error: Error) {
 export default function App() {
   const { chainId, activate, deactivate, active, error } = useWeb3React();
   const [connectedNetwork, setConnectedNetwork] = useState("");
-  const [selectedKey, setSelectedKey] = useState('none');
-  const TOKENS_BY_NETWORK = () => {
-    switch (parseInt(`${chainId}`)) {
-      case 1:
-      case 3:
-      case 4:
-      case 42:
-        return [
-          {
-            address: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-            symbol: "ETH",
-            name: "ETH",
-            decimals: 18,
-          },
-          {
-            address: "0x55d398326f99059ff775485246999027b3197955",
-            symbol: "USDT",
-            name: "USDT",
-            decimals: 18,
-          },
-          {
-            address: "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
-            symbol: "USDC",
-            name: "USDC",
-            decimals: 18
-          }
-        ]
-      case 137:
-        return [
-          {
-            address: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-            symbol: "MATIC",
-            name: "MATIC",
-            decimals: 18,
-          }
-        ];
-      default:
-        return [];
-    }
-    
-  }
+
   console.log("active: ", active);
   console.log("chainId: ", chainId);
 
   useEffect((): any => {
-    const network = chainId === 1 || chainId === 3 || chainId === 4 || chainId === 42 ? `Ethereum` : chainId === 137 ? `Polygon` : ``;
+    const network = chainId === 1 ? `Ethereum` : chainId === 137 ? `Polygon` : ``;
     setConnectedNetwork(network);
-    setSelectedKey('none');
   }, [active, chainId]);
 
   function connect() {
@@ -127,19 +86,6 @@ export default function App() {
             {"CONNECT"}
           </Button>
         </Stack>
-      </Stack>
-      <Stack direction="column" alignItems="center" padding={2}>
-        {TOKENS_BY_NETWORK().length > 0 && TOKENS_BY_NETWORK().map((token: any, index) => (
-          <Button
-            disabled={selectedKey !== 'none' && selectedKey !== token.symbol}
-            variant="contained"
-            key={index}
-            style={{ marginBottom: 10 }}
-            onClick={() => setSelectedKey(selectedKey === token.symbol ? 'none' : token.symbol)}
-          >
-            KEY: {token.symbol}
-          </Button>
-        ))}
       </Stack>
       <Stack height="90vh" justifyContent="center" alignItems="center">
         <Button variant="contained" onClick={swtichToPolygon}>
