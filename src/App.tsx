@@ -80,7 +80,10 @@ export default function App() {
           revenueContract.methods.balanceOf(account, tokenId)
           .call({ from: account })
           .then((result: string) => {
-            console.log("balanceOf", tokenId, result) //0x18632ee94d6395e0cd1ea6c7ee702712baf7c6d9 :test https://opensea.io/GFCVault,  the address of our vault
+            //0x18632ee94d6395e0cd1ea6c7ee702712baf7c6d9 :test https://opensea.io/GFCVault,  the address of our vault
+            let newData = [...keys];
+            newData[Number(tokenId) - 1].value = Number(result);
+            setKeys(newData);
           })
         }
       })
