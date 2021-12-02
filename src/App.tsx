@@ -71,20 +71,22 @@ export default function App() {
   useEffect((): any => {
     const network = chainId === 1 ? `ETH mainnet` : chainId === 137 ? `Polygon mainnet` : ``;
     setConnectedNetwork(network);
+
     if (chainId === 137) {
+      console.log('chainId', chainId);
       setSwitchedNetwork(true);
       const web3 = new Web3(window.ethereum)
       account(web3).then(account => {
-        const revenueContract = new web3.eth.Contract([{"inputs": [{"internalType": "address", "name": "account", "type": "address"}, {"internalType": "uint256", "name": "id", "type": "uint256"}], "name": "balanceOf", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}], "0x3702f4c46785bbd947d59a2516ac1ea30f2babf2")
+        const revenueContract = new web3.eth.Contract([{ "inputs": [{ "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint256", "name": "id", "type": "uint256" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }], "0x3702f4c46785bbd947d59a2516ac1ea30f2babf2")
         for (let tokenId = 1; tokenId <= 3; tokenId++) {
           revenueContract.methods.balanceOf(account, tokenId)
-          .call({ from: account })
-          .then((result: string) => {
-            //0x18632ee94d6395e0cd1ea6c7ee702712baf7c6d9 :test https://opensea.io/GFCVault,  the address of our vault
-            let newData = [...keys];
-            newData[Number(tokenId) - 1].value = Number(result);
-            setKeys(newData);
-          })
+            .call({ from: account })
+            .then((result: string) => {
+              //0x18632ee94d6395e0cd1ea6c7ee702712baf7c6d9 :test https://opensea.io/GFCVault,  the address of our vault
+              let newData = [...keys];
+              newData[Number(tokenId) - 1].value = Number(result);
+              setKeys(newData);
+            })
         }
       })
     }
@@ -133,7 +135,7 @@ export default function App() {
             });
         }
       })
-      .finally(() => {});
+      .finally(() => { });
   }
 
   return (
@@ -170,44 +172,46 @@ export default function App() {
       </Stack>
       <Stack height="90vh" justifyContent="center" alignItems="center">
         {
-          !switchedNetwork ? (
-            <Box className="message-box">
-              <div className="box-text">In order to open loot boxes, <br />you will have to be on the Polygon network</div>
-              <Stack justifyContent="center" alignItems="center">
-                <Button variant="contained" onClick={swtichToPolygon}>
-                  Add Polygon network
-                </Button>
-              </Stack>
-            </Box>
-          ) : (
-            <Box className="keys-group">
-              <Stack direction="row" justifyContent="space-between" padding={2}>
-                {
-                  keys.map((key, index) => (
-                    <div className="group-item" key={index}>
-                      <img src={KeyBackground} className="background" />
-                      <div className="key-item">
-                        <img src={key.image} />
-                        <div className="key-title">{key.name}</div>
-                        <div className="key-value">
-                          You have: {key.value}
+          chainId !== undefined && (
+            !switchedNetwork ? (
+              <Box className="message-box">
+                <div className="box-text">In order to open loot boxes, <br />you will have to be on the Polygon network</div>
+                <Stack justifyContent="center" alignItems="center">
+                  <Button variant="contained" onClick={swtichToPolygon}>
+                    Add Polygon network
+                  </Button>
+                </Stack>
+              </Box>
+            ) : (
+              <Box className="keys-group">
+                <Stack direction="row" justifyContent="space-between" padding={2}>
+                  {
+                    keys.map((key, index) => (
+                      <div className="group-item" key={index}>
+                        <img src={KeyBackground} className="background" />
+                        <div className="key-item">
+                          <img src={key.image} />
+                          <div className="key-title">{key.name}</div>
+                          <div className="key-value">
+                            You have: {key.value}
+                          </div>
+                          <Stack justifyContent="center" alignItems="center">
+                            <Button
+                              variant="contained"
+                              className="setkey-btn"
+                              disabled={selectedKey !== key.keyId && selectedKey !== 'none'}
+                              onClick={() => setSelectedKey(selectedKey === key.keyId ? 'none' : key.keyId)}
+                            >
+                              Use Key
+                            </Button>
+                          </Stack>
                         </div>
-                        <Stack justifyContent="center" alignItems="center">
-                          <Button
-                            variant="contained"
-                            className="setkey-btn"
-                            disabled={selectedKey !== key.keyId && selectedKey !== 'none'}
-                            onClick={() => setSelectedKey(selectedKey === key.keyId ? 'none' : key.keyId)}
-                          >
-                            Use Key
-                          </Button>
-                        </Stack>
                       </div>
-                    </div>
-                  ))
-                }
-              </Stack>
-            </Box>
+                    ))
+                  }
+                </Stack>
+              </Box>
+            )
           )
         }
         {!!error && (
